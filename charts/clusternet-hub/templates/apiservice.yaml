@@ -1,0 +1,42 @@
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.proxies.clusternet.io
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  labels: {{- include "common.labels.standard" . | nindent 4}}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+spec:
+  insecureSkipTLSVerify: true
+  group: proxies.clusternet.io
+  groupPriorityMinimum: 1000
+  versionPriority: 100
+  service:
+    name: {{ include "common.names.fullname" . }}
+    namespace: {{ .Release.Namespace }}
+  version: v1alpha1
+
+---
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.shadow
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  labels: {{- include "common.labels.standard" . | nindent 4}}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+spec:
+  insecureSkipTLSVerify: true
+  group: shadow
+  groupPriorityMinimum: 1
+  versionPriority: 1
+  service:
+    name: {{ include "common.names.fullname" . }}
+    namespace: {{ .Release.Namespace }}
+  version: v1alpha1
