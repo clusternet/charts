@@ -4,7 +4,7 @@
 
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
-helm install my-clusternet-hub clusternet/clusternet-hub
+helm install my-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
 ```
 
 ## Introduction
@@ -30,24 +30,24 @@ helm install my-clusternet-hub clusternet/clusternet-hub
 
 ## Installing the Chart
 
-To install the chart with the release name `my-clusternet-hub`:
+To install the chart with the release name `my-hub`:
 
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
-helm install my-clusternet-hub clusternet/clusternet-hub
+helm install my-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
 ```
 
 These commands deploy `clusternet-hub` on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
-> **Tip**: List all releases using `helm list`
+> **Tip**: List all releases using `helm list -A`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-clusternet-hub` deployment:
+To uninstall/delete the `my-hub` deployment:
 
 ```console
-helm delete my-clusternet-hub
+helm delete my-hub -n clusternet-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.

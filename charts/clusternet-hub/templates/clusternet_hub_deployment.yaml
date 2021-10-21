@@ -11,27 +11,17 @@ metadata:
     {{- end }}
 
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{ .Release.Namespace }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-
----
 kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: {{ template "clusternet-hub.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "10"
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
   labels: {{- include "common.labels.standard" . | nindent 4}}
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
@@ -43,9 +33,12 @@ kind: Service
 metadata:
   name: {{ include "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "20"
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
   labels: {{- include "common.labels.standard" . | nindent 4}}
     app: {{ include "common.names.fullname" . }}
     {{- if .Values.commonLabels }}
@@ -65,9 +58,13 @@ kind: Deployment
 metadata:
   name: {{ include "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
+  annotations:
+    "helm.sh/hook": post-install,post-delete
+    "helm.sh/hook-weight": "20"
+    "helm.sh/hook-delete-policy": before-hook-creation
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
   labels: {{- include "common.labels.standard" . | nindent 4}}
     app: {{ include "common.names.fullname" . }}
     {{- if .Values.commonLabels }}
