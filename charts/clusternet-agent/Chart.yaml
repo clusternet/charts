@@ -7,7 +7,8 @@ annotations:
   role: Agent
 keywords:
   - clusternet
-  - cluster agent
+  - agent
+  - clusternet-agent
 sources:
   - https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
 
