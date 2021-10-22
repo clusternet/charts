@@ -1,0 +1,51 @@
+apiVersion: v1
+entries:
+  clusternet-agent:
+  - annotations:
+      category: Infrastructure
+      role: Agent
+    apiVersion: v2
+    appVersion: v0.5.0
+    created: "2021-10-22T09:11:06.876026833Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.10.0
+    description: Chart for clusternet-agent
+    digest: 99660dcee4e28687bc09abda34d81834d1c08001ec8ac5b53162e7ce9ef75432
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    keywords:
+    - clusternet
+    - agent
+    - clusternet-agent
+    name: clusternet-agent
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-agent-0.1.0/clusternet-agent-0.1.0.tgz
+    version: 0.1.0
+  clusternet-hub:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: v0.5.0
+    created: "2021-10-22T09:11:07.15099536Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.10.0
+    description: Chart for clusternet-hub
+    digest: 65067433597e4d24ea73ef635fa75a3c1cbd3cd5c23532dbdcd4553d48a8d315
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    keywords:
+    - clusternet
+    - cluster management
+    name: clusternet-hub
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-hub-0.1.0/clusternet-hub-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-10-22T09:11:07.15100676Z"
