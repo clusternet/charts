@@ -5,6 +5,7 @@
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
 helm install my-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
+kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
 ```
 
 ## Introduction
@@ -35,6 +36,7 @@ To install the chart with the release name `my-hub`:
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
 helm install my-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
+https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
 ```
 
 These commands deploy `clusternet-hub` on the Kubernetes cluster in the default configuration.

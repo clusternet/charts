@@ -18,3 +18,6 @@ helm repo add clusternet https://clusternet.github.io/charts
 ```
 
 You can then run `helm search repo clusternet` to see the charts.
+
+- [installing `clusternet-hub`](./charts/clusternet-hub)
+- [installing `clusternet-agent`](./charts/clusternet-agent)
