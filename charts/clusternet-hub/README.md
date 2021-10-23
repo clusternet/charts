@@ -58,13 +58,13 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ### Common parameters
 
-| Name                     | Description                                                                             | Value           |
-| ------------------------ | --------------------------------------------------------------------------------------- | --------------- |
-| `nameOverride`           | String to partially override kafka.fullname                                             | `""`            |
-| `fullnameOverride`       | String to fully override kafka.fullname                                                 | `""`            |
-| `clusterDomain`          | Default Kubernetes cluster domain                                                       | `cluster.local` |
-| `commonLabels`           | Labels to add to all deployed objects                                                   | `{}`            |
-| `commonAnnotations`      | Annotations to add to all deployed objects                                              | `{}`            |
+| Name                | Description                                        | Value |
+| ------------------- | -------------------------------------------------- | ----- |
+| `kubeVersion`       | Override Kubernetes version                        | `""`  |
+| `nameOverride`      | String to partially override common.names.fullname | `""`  |
+| `fullnameOverride`  | String to fully override common.names.fullname     | `""`  |
+| `commonLabels`      | Labels to add to all deployed objects              | `{}`  |
+| `commonAnnotations` | Annotations to add to all deployed objects         | `{}`  |
 
 ### Exposure parameters
 
