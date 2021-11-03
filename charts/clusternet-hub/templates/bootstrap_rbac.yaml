@@ -99,3 +99,6 @@ subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: User
     name: system:anonymous
+  - kind: ServiceAccount
+    name: clusternet-hub-proxy
+    namespace: {{ .Release.Namespace }}

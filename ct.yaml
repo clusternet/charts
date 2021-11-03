@@ -5,4 +5,5 @@ chart-dirs:
   - charts
 chart-repos:
   - clusternet=https://clusternet.github.io/charts
+  - bitnami=https://charts.bitnami.com/bitnami
 helm-extra-args: --timeout 600s

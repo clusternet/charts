@@ -4,7 +4,7 @@
 
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
-helm install my-clusternet-agent -n clusternet-system --create-namespace \
+helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=PLEASE-CHANGE-ME \
   --set registrationToken=PLEASE-CHANGE-ME \
   clusternet/clusternet-agent
@@ -13,7 +13,7 @@ helm install my-clusternet-agent -n clusternet-system --create-namespace \
 Please update `PLEASE-CHANGE-ME` to your valid configurations, such as,
 
 ```console
-helm install my-clusternet-agent -n clusternet-system --create-namespace \
+helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=07401b.f395accd246ae52d \
   clusternet/clusternet-agent
@@ -36,11 +36,15 @@ helm install my-clusternet-agent -n clusternet-system --create-namespace \
 
 ## Installing the Chart
 
-To install the chart with the release name `my-agent` and release namespace `clusternet-system`:
+> Note:
+> The images are synced to [dockerhub](https://hub.docker.com/u/clusternet) as well,
+> you could set `image.registry` to empty or `docker.io` if needed.
+
+To install the chart with the release name `clusternet-agent` and release namespace `clusternet-system`:
 
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
-helm install my-clusternet-agent -n clusternet-system --create-namespace \
+helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=PLEASE-CHANGE-ME \
   --set registrationToken=PLEASE-CHANGE-ME \
   clusternet/clusternet-agent
@@ -49,7 +53,7 @@ helm install my-clusternet-agent -n clusternet-system --create-namespace \
 Please update `PLEASE-CHANGE-ME` to your valid configurations, such as,
 
 ```console
-helm install my-clusternet-agent -n clusternet-system --create-namespace \
+helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=07401b.f395accd246ae52d \
   clusternet/clusternet-agent
@@ -62,10 +66,10 @@ The [Parameters](#parameters) section lists the parameters that can be configure
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-agent` deployment:
+To uninstall/delete the `clusternet-agent` deployment:
 
 ```console
-helm delete my-agent -n clusternet-system
+helm delete clusternet-agent -n clusternet-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.

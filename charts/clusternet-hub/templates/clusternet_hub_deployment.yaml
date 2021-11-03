@@ -28,6 +28,21 @@ metadata:
     {{- end }}
 
 ---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: clusternet-hub-proxy
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  labels: {{- include "common.labels.standard" . | nindent 4}}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+
+---
 apiVersion: v1
 kind: Service
 metadata:
