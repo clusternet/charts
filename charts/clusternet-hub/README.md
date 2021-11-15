@@ -4,7 +4,7 @@
 
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
-helm install my-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
+helm install clusternet-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
 kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
 ```
 
@@ -31,11 +31,15 @@ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/ma
 
 ## Installing the Chart
 
-To install the chart with the release name `my-hub`:
+> Note:
+> The images are synced to [dockerhub](https://hub.docker.com/u/clusternet) as well,
+> you could set `image.registry` to empty or `docker.io` if needed.
+
+To install the chart with the release name `clusternet-hub`:
 
 ```console
 helm repo add clusternet https://clusternet.github.io/charts
-helm install my-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
+helm install clusternet-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
 kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
 ```
 
@@ -46,10 +50,10 @@ The [Parameters](#parameters) section lists the parameters that can be configure
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-hub` deployment:
+To uninstall/delete the `clusternet-hub` deployment:
 
 ```console
-helm delete my-hub -n clusternet-system
+helm delete clusternet-hub -n clusternet-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.

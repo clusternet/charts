@@ -14,10 +14,10 @@ nameOverride: ""
 fullnameOverride: ""
 ## @param commonLabels Labels to add to all deployed objects
 ##
-commonLabels: { }
+commonLabels: {}
 ## @param commonAnnotations Annotations to add to all deployed objects
 ##
-commonAnnotations: { }
+commonAnnotations: {}
 
 ## @section Clusternet Agent Parameters
 ## @param parentURL The URL should be the apiserver address of the parent cluster to register to
@@ -45,7 +45,7 @@ serviceAccount:
 image:
   registry: ghcr.io
   repository: clusternet/clusternet-agent
-  tag: v0.5.0
+  tag: v0.6.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -58,7 +58,7 @@ image:
   ## pullSecrets:
   ##   - myRegistryKeySecretName
   ##
-  pullSecrets: [ ]
+  pullSecrets: []
 ## @param extraArgs Additional command line arguments to pass to clusternet-agent
 ## e.g:
 ##  v: 4
@@ -83,16 +83,16 @@ resources:
   ## limits:
   ##    cpu: 400m
   ##    memory: 250Mi
-  limits: { }
+  limits: {}
   ## Examples:
   ## requests:
   ##    cpu: 100m
   ##    memory: 25Mi
-  requests: { }
+  requests: {}
 ## @param nodeSelector Node labels for pod assignment
 ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
 ##
-nodeSelector: { }
+nodeSelector: {}
 ## @param priorityClassName Set Priority Class Name to allow priority control over other pods
 ## ref: https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
 ##
@@ -100,7 +100,7 @@ priorityClassName: ""
 ## @param tolerations Tolerations for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
 ##
-tolerations: [ ]
+tolerations: []
 ## @param podAffinityPreset Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
 ## ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
 ##
@@ -127,9 +127,9 @@ nodeAffinityPreset:
   ##   - e2e-az1
   ##   - e2e-az2
   ##
-  values: [ ]
+  values: []
 ## @param affinity Affinity for pod assignment
 ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 ## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
 ##
-affinity: { }
+affinity: {}
