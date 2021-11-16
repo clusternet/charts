@@ -119,10 +119,20 @@ spec:
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources: {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: SYSTEM_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: RESERVED_NAMESPACE
+              value: {{ .Values.reservedNamespace }}
           command:
             - /usr/local/bin/clusternet-hub
           args:
             - --secure-port={{ .Values.securePort }}
+            - --anonymous-auth-supported={{ .Values.anonymousAuthSupported }}
+            - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
+            - --reserved-namespace=$(RESERVED_NAMESPACE)
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}
