@@ -6,6 +6,30 @@ entries:
       role: Agent
     apiVersion: v2
     appVersion: v0.6.0
+    created: "2021-11-16T07:26:43.262126055Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.10.0
+    description: Chart for clusternet-agent
+    digest: 74d9faba6c69205e982946cde7072311f74d2e1fcd334bd31be8ebfeb531c6a7
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    keywords:
+    - clusternet
+    - agent
+    - clusternet-agent
+    name: clusternet-agent
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-agent-0.2.1/clusternet-agent-0.2.1.tgz
+    version: 0.2.1
+  - annotations:
+      category: Infrastructure
+      role: Agent
+    apiVersion: v2
+    appVersion: v0.6.0
     created: "2021-11-15T13:56:26.188130507Z"
     dependencies:
     - name: common
@@ -54,6 +78,28 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: v0.6.0
+    created: "2021-11-16T07:26:43.474318043Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.10.0
+    description: Chart for clusternet-hub
+    digest: 607bbb1f68b303619905ccc44dc7ae5e12e3aeb065a48ee73c43c3c5791cd36e
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    keywords:
+    - clusternet
+    - cluster management
+    name: clusternet-hub
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-hub-0.2.1/clusternet-hub-0.2.1.tgz
+    version: 0.2.1
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: v0.6.0
     created: "2021-11-15T13:56:26.391865704Z"
     dependencies:
     - name: common
@@ -94,4 +140,4 @@ entries:
     urls:
     - https://github.com/clusternet/charts/releases/download/clusternet-hub-0.1.0/clusternet-hub-0.1.0.tgz
     version: 0.1.0
-generated: "2021-11-15T13:56:26.392157505Z"
+generated: "2021-11-16T07:26:43.474341743Z"
