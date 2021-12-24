@@ -1,4 +1,4 @@
-# Default values for clusternet-agent.
+# Default values for clusternet-scheduler.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -19,32 +19,24 @@ commonLabels: {}
 ##
 commonAnnotations: {}
 
-## @section Clusternet Agent Parameters
-## @param parentURL The URL should be the apiserver address of the parent cluster to register to
-## The https scheme must be specified and it is the only one supported at the moment
-## If the apiserver is not listening on the standard https port (:443), please specify the port number in the URL to ensure the agent connects to the right endpoint
-## e.g. https://192.168.10.10:6443
-parentURL: ""
-## @param registrationToken The bootstrap token used by clusternet cluster registration
-## e.g. 07401b.f395accd246ae52d
-registrationToken: ""
-## @param replicaCount Number of clusternet-agent replicas desired
+## @section Clusternet Scheduler Parameters
+## @param replicaCount Number of clusternet-scheduler replicas desired
 ##
 replicaCount: 3
 ## @param serviceAccount.name The name of the ServiceAccount to create
 ## If not set, a name is generated using the common.names.fullname template
 ##
 serviceAccount:
-  name: "clusternet-agent"
-## @param image.registry clusternet-agent image registry
-## @param image.repository clusternet-agent image repository
-## @param image.tag clusternet-agent image tag (immutable tags are recommended)
-## @param image.pullPolicy clusternet-agent image pull policy
+  name: "clusternet-scheduler"
+## @param image.registry clusternet-scheduler image registry
+## @param image.repository clusternet-scheduler image repository
+## @param image.tag clusternet-scheduler image tag (immutable tags are recommended)
+## @param image.pullPolicy clusternet-scheduler image pull policy
 ## @param image.pullSecrets Specify docker-registry secret names as an array
 ##
 image:
   registry: ghcr.io
-  repository: clusternet/clusternet-agent
+  repository: clusternet/clusternet-scheduler
   tag: v0.7.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -59,16 +51,9 @@ image:
   ##   - myRegistryKeySecretName
   ##
   pullSecrets: []
-## @param extraArgs Additional command line arguments to pass to clusternet-agent
-## e.g:
-##  v: 4
-##  feature-gates: "SocketConnection=true,AppPusher=true"
-##  cluster-sync-mode: Dual
-##
+## @param extraArgs Additional command line arguments to pass to clusternet-scheduler
 extraArgs:
   v: 4
-  feature-gates: "SocketConnection=true,AppPusher=true"
-  cluster-sync-mode: Dual
 ## Container resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ## We usually recommend not to specify default resources and to leave this as a conscious

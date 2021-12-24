@@ -1,7 +1,9 @@
+---
 apiVersion: v1
-kind: Namespace
+kind: ServiceAccount
 metadata:
-  name: clusternet-reserved
+  name: {{ template "clusternet-scheduler.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
@@ -11,75 +13,14 @@ metadata:
     {{- end }}
 
 ---
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: {{ template "clusternet-hub.serviceAccountName" . }}
-  namespace: {{ .Release.Namespace }}
-  annotations:
-    "helm.sh/hook": post-install
-    "helm.sh/hook-weight": "10"
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-
----
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: clusternet-hub-proxy
-  namespace: {{ .Release.Namespace }}
-  annotations:
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "common.names.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  annotations:
-    "helm.sh/hook": post-install
-    "helm.sh/hook-weight": "20"
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    app: {{ include "common.names.fullname" . }}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-spec:
-  ports:
-    - port: 443
-      protocol: TCP
-      targetPort: {{ .Values.securePort }}
-  selector: {{- include "common.labels.matchLabels" . | nindent 4 }}
-    app: {{ include "common.names.fullname" . }}
-
----
 apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
   name: {{ include "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  annotations:
-    "helm.sh/hook": post-install,post-delete
-    "helm.sh/hook-weight": "20"
-    "helm.sh/hook-delete-policy": before-hook-creation
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
   labels: {{- include "common.labels.standard" . | nindent 4}}
     app: {{ include "common.names.fullname" . }}
     {{- if .Values.commonLabels }}
@@ -113,9 +54,9 @@ spec:
       {{- if .Values.tolerations}}
       tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ template "clusternet-hub.serviceAccountName" . }}
+      serviceAccountName: {{ template "clusternet-scheduler.serviceAccountName" . }}
       containers:
-        - name: clusternet-hub
+        - name: clusternet-scheduler
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources: {{- toYaml .Values.resources | nindent 12 }}
@@ -124,15 +65,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: RESERVED_NAMESPACE
-              value: {{ .Values.reservedNamespace }}
           command:
-            - /usr/local/bin/clusternet-hub
+            - /usr/local/bin/clusternet-scheduler
           args:
-            - --secure-port={{ .Values.securePort }}
-            - --anonymous-auth-supported={{ .Values.anonymousAuthSupported }}
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
-            - --reserved-namespace=$(RESERVED_NAMESPACE)
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}

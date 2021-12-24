@@ -1,0 +1,50 @@
+apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
+kind: ClusterRole
+metadata:
+  name: clusternet:scheduler
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  labels: {{- include "common.labels.standard" . | nindent 4}}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+rules:
+  - apiGroups: [ "apps.clusternet.io" ]
+    resources: [ "subscriptions" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "apps.clusternet.io" ]
+    resources: [ "subscriptions/status" ]
+    verbs: [ "update" ]
+  - apiGroups: [ "clusters.clusternet.io" ]
+    resources: [ "managedclusters" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "" ]
+    resources: [ "events" ]
+    verbs: [ "*" ]
+  - apiGroups: [ "coordination.k8s.io" ]
+    resources: [ "leases" ]
+    verbs: [ "*" ]
+  - nonResourceURLs: [ "*" ]
+    verbs: [ "get" ]
+
+---
+apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
+kind: ClusterRoleBinding
+metadata:
+  name: clusternet:scheduler
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  labels: {{- include "common.labels.standard" . | nindent 4}}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: clusternet:scheduler
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "clusternet-scheduler.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}

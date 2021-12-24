@@ -1,14 +1,21 @@
 apiVersion: v2
-name: clusternet-hub
-home: https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
-description: Chart for clusternet-hub
+name: clusternet-scheduler
+home: https://github.com/clusternet/charts/tree/main/charts/clusternet-scheduler
+description: Chart for clusternet-scheduler
 annotations:
   category: Infrastructure
+  role: Scheduler
 keywords:
   - clusternet
-  - cluster management
+  - scheduler
+  - clusternet-scheduler
 sources:
-  - https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+  - https://github.com/clusternet/charts/tree/main/charts/clusternet-scheduler
+
+dependencies:
+  - name: common
+    version: 1.10.0
+    repository: https://charts.bitnami.com/bitnami
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -17,13 +24,8 @@ sources:
 #
 # Library charts provide useful utilities or functions for the chart developer. They're included as
 # a dependency of application charts to inject those utilities and functions into the rendering
-# pipeline. Library charts do not define any templates and therefore cannot be deployed
+# pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
-
-dependencies:
-  - name: common
-    version: 1.10.0
-    repository: https://charts.bitnami.com/bitnami
 
 # A SemVer range of compatible Kubernetes versions
 kubeVersion: ""
