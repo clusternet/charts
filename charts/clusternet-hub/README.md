@@ -3,9 +3,25 @@
 ## TL;DR
 
 ```console
-helm repo add clusternet https://clusternet.github.io/charts
-helm install clusternet-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
-kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
+$ helm repo add clusternet https://clusternet.github.io/charts
+$ helm install clusternet-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
+```
+
+### Create Auth Token
+
+- If bootstrapping authentication is supported, i.e. `--enable-bootstrap-token-auth=true` is explicitly set in the kube-apiserver running in parent cluster.
+
+```console
+$ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
+```
+
+- If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s) , i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
+
+```console
+# this will create a serviceaccount token
+$ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_serviceaccount_token.yaml
+$ kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annotations.kubernetes\.io/service-account\.name=="cluster-bootstrap-use")].data.token}' | base64 --decode; echo
+HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
 ```
 
 ## Introduction
