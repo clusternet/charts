@@ -3,8 +3,8 @@
 ## TL;DR
 
 ```console
-helm repo add clusternet https://clusternet.github.io/charts
-helm install clusternet-agent -n clusternet-system --create-namespace \
+$ helm repo add clusternet https://clusternet.github.io/charts
+$ helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=PLEASE-CHANGE-ME \
   --set registrationToken=PLEASE-CHANGE-ME \
   clusternet/clusternet-agent
@@ -13,9 +13,20 @@ helm install clusternet-agent -n clusternet-system --create-namespace \
 Please update `PLEASE-CHANGE-ME` to your valid configurations, such as,
 
 ```console
-helm install clusternet-agent -n clusternet-system --create-namespace \
+$ helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=07401b.f395accd246ae52d \
+  clusternet/clusternet-agent
+```
+
+**Note:** If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s) , i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
+
+[Click here to get the serviceaccount token from parent cluster.](../clusternet-hub/README.md#get-serviceaccount-token-from-parent-cluster)
+
+```console
+$ helm install clusternet-agent -n clusternet-system --create-namespace \
+  --set parentURL=https://192.168.10.10:6443 \
+  --set registrationToken=Parent-Cluster-ServiceAccount-Token \
   clusternet/clusternet-agent
 ```
 
