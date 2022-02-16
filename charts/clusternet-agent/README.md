@@ -21,11 +21,7 @@ $ helm install clusternet-agent -n clusternet-system --create-namespace \
 
 **Note:** If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s) , i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
 
-```console
-# Get serviceaccount token from parent cluster.
-$ kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annotations.kubernetes\.io/service-account\.name=="cluster-bootstrap-use")].data.token}' | base64 --decode; echo
-HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
-```
+[Click here to get the serviceaccount token from parent cluster.](../clusternet-hub/README.md#get-serviceaccount-token-from-parent-cluster)
 
 ```console
 $ helm install clusternet-agent -n clusternet-system --create-namespace \

@@ -20,6 +20,11 @@ $ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/
 ```console
 # this will create a serviceaccount token
 $ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_serviceaccount_token.yaml
+```
+
+### Get ServiceAccount Token from parent cluster
+
+```console
 $ kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annotations.kubernetes\.io/service-account\.name=="cluster-bootstrap-use")].data.token}' | base64 --decode; echo
 HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
 ```
