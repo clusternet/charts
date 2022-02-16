@@ -6,6 +6,30 @@ entries:
       role: Agent
     apiVersion: v2
     appVersion: v0.7.0
+    created: "2022-02-16T13:19:54.497167075Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.10.0
+    description: Chart for clusternet-agent
+    digest: d695ad87488f9083250945ab07b3c9d83c28b2abc3b0aaf47d23b330cfb17a9d
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    keywords:
+    - clusternet
+    - agent
+    - clusternet-agent
+    name: clusternet-agent
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-agent-0.3.1/clusternet-agent-0.3.1.tgz
+    version: 0.3.1
+  - annotations:
+      category: Infrastructure
+      role: Agent
+    apiVersion: v2
+    appVersion: v0.7.0
     created: "2021-12-24T01:53:30.074350756Z"
     dependencies:
     - name: common
@@ -98,6 +122,28 @@ entries:
     - https://github.com/clusternet/charts/releases/download/clusternet-agent-0.1.0/clusternet-agent-0.1.0.tgz
     version: 0.1.0
   clusternet-hub:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: v0.7.0
+    created: "2022-02-16T13:19:54.665771187Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.10.0
+    description: Chart for clusternet-hub
+    digest: d66a2ae222f73cb8ea3da6e3da0e0dfe21efc656e17aa19d418099436103ac01
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    keywords:
+    - clusternet
+    - cluster management
+    name: clusternet-hub
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-hub-0.3.1/clusternet-hub-0.3.1.tgz
+    version: 0.3.1
   - annotations:
       category: Infrastructure
     apiVersion: v2
@@ -211,4 +257,4 @@ entries:
     urls:
     - https://github.com/clusternet/charts/releases/download/clusternet-scheduler-0.3.0/clusternet-scheduler-0.3.0.tgz
     version: 0.3.0
-generated: "2021-12-24T01:53:30.48242316Z"
+generated: "2022-02-16T13:19:54.665816341Z"
