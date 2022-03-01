@@ -19,7 +19,8 @@ $ helm install clusternet-agent -n clusternet-system --create-namespace \
   clusternet/clusternet-agent
 ```
 
-**Note:** If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s) , i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
+**Note:** If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s),
+i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
 
 [Click here to get the serviceaccount token from parent cluster.](../clusternet-hub/README.md#get-serviceaccount-token-from-parent-cluster)
 

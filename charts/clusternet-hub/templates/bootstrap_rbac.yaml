@@ -102,3 +102,24 @@ subjects:
   - kind: ServiceAccount
     name: clusternet-hub-proxy
     namespace: {{ .Release.Namespace }}
+
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: cluster-bootstrap-use
+  namespace: {{ .Release.Namespace }}
+
+---
+apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
+kind: ClusterRoleBinding
+metadata:
+  name: clusternet:system:bootstrapping:sa
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: clusternet:system:bootstrapping
+subjects:
+  - kind: ServiceAccount
+    name: cluster-bootstrap-use
+    namespace: {{ .Release.Namespace }}
