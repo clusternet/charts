@@ -53,6 +53,8 @@ rules:
   - apiGroups: ["*"]
     resources: ["*"]
     verbs: ["*"]
+  - nonResourceURLs: ["*"]
+    verbs: ["*"]
 
 ---
 apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
