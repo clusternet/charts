@@ -86,6 +86,19 @@ spec:
                       type: string
                   type: object
                 type: array
+              dividingSchedulingStrategy:
+                description: Dividing scheduling config params. Present only if SchedulingStrategyType
+                  = Dividing.
+                properties:
+                  type:
+                    default: Static
+                    description: Type of dividing replica scheduling.
+                    enum:
+                    - Static
+                    type: string
+                required:
+                - type
+                type: object
               feeds:
                 description: Feeds
                 items:
@@ -123,7 +136,7 @@ spec:
                   SchedulingStrategy. Otherwise, with generic SchedulingStrategy.
                 enum:
                 - Replication
-                - Balancing
+                - Dividing
                 type: string
               subscribers:
                 description: Subscribers subscribes
@@ -175,6 +188,12 @@ spec:
                             only "value". The requirements are ANDed.
                           type: object
                       type: object
+                    weight:
+                      description: Static weight of subscriber when dividing replicas.
+                        Present only for static divided scheduling.
+                      format: int32
+                      minimum: 0
+                      type: integer
                   required:
                   - clusterAffinity
                   type: object
@@ -198,6 +217,14 @@ spec:
               desiredReleases:
                 description: Total number of Helm releases desired by this Subscription.
                 type: integer
+              replicas:
+                additionalProperties:
+                  items:
+                    format: int32
+                    type: integer
+                  type: array
+                description: Desired replicas of targeted clusters for each feed.
+                type: object
               specHash:
                 description: SpecHash calculates the hash value of current SubscriptionSpec.
                 format: int64
