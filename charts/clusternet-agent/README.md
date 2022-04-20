@@ -7,6 +7,7 @@ $ helm repo add clusternet https://clusternet.github.io/charts
 $ helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=PLEASE-CHANGE-ME \
   --set registrationToken=PLEASE-CHANGE-ME \
+  --set extraArgs.cluster-reg-name=PLEASE-CHANGE-ME \
   clusternet/clusternet-agent
 ```
 
@@ -16,6 +17,7 @@ Please update `PLEASE-CHANGE-ME` to your valid configurations, such as,
 $ helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=07401b.f395accd246ae52d \
+  --set extraArgs.cluster-reg-name=mycluster \
   clusternet/clusternet-agent
 ```
 
@@ -28,6 +30,7 @@ i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please 
 $ helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=Parent-Cluster-ServiceAccount-Token \
+  --set extraArgs.cluster-reg-name=mycluster \
   clusternet/clusternet-agent
 ```
 
@@ -59,6 +62,7 @@ helm repo add clusternet https://clusternet.github.io/charts
 helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=PLEASE-CHANGE-ME \
   --set registrationToken=PLEASE-CHANGE-ME \
+  --set extraArgs.cluster-reg-name=PLEASE-CHANGE-ME \
   clusternet/clusternet-agent
 ```
 
@@ -68,8 +72,11 @@ Please update `PLEASE-CHANGE-ME` to your valid configurations, such as,
 helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=07401b.f395accd246ae52d \
+  --set extraArgs.cluster-reg-name=mycluster \
   clusternet/clusternet-agent
 ```
+
+`extraArgs.cluster-reg-name` is optional, if not set, clusternet-agent will generate a random name.
 
 These commands deploy `clusternet-agent` on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.

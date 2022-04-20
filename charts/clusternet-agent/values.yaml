@@ -64,11 +64,13 @@ image:
 ##  v: 4
 ##  feature-gates: "SocketConnection=true,AppPusher=true"
 ##  cluster-sync-mode: Dual
+##  cluster-reg-name: <your-cluster-name>
 ##
 extraArgs:
   v: 4
   feature-gates: "SocketConnection=true,AppPusher=true,Recovery=true"
   cluster-sync-mode: Dual
+  cluster-reg-name: ""
 ## Container resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ## We usually recommend not to specify default resources and to leave this as a conscious
