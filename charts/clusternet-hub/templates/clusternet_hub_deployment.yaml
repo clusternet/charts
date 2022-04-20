@@ -17,8 +17,6 @@ metadata:
   name: {{ template "clusternet-hub.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    "helm.sh/hook": post-install
-    "helm.sh/hook-weight": "10"
     {{- if .Values.commonAnnotations }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
     {{- end }}
@@ -49,8 +47,6 @@ metadata:
   name: {{ include "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    "helm.sh/hook": post-install
-    "helm.sh/hook-weight": "20"
     {{- if .Values.commonAnnotations }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
     {{- end }}
@@ -74,9 +70,6 @@ metadata:
   name: {{ include "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    "helm.sh/hook": post-install,post-delete
-    "helm.sh/hook-weight": "20"
-    "helm.sh/hook-delete-policy": before-hook-creation
     {{- if .Values.commonAnnotations }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
     {{- end }}
