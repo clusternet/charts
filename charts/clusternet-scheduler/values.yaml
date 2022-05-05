@@ -52,8 +52,7 @@ image:
   ##
   pullSecrets: []
 ## @param extraArgs Additional command line arguments to pass to clusternet-scheduler
-extraArgs:
-  v: 4
+extraArgs: {}
 ## Container resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ## We usually recommend not to specify default resources and to leave this as a conscious

@@ -36,7 +36,7 @@ securePort: 443
 image:
   registry: ghcr.io
   repository: clusternet/clusternet-hub
-  tag: v0.9.1
+  tag: v0.10.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -60,7 +60,6 @@ anonymousAuthSupported: true
 ##  feature-gates: "SocketConnection=true,Deployer=true,ShadowAPI=true,FeedInUseProtection=true"
 ##
 extraArgs:
-  v: 4
   feature-gates: "SocketConnection=true,Deployer=true,ShadowAPI=true,FeedInUseProtection=true,FeedInventory=true"
 ## Container resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/

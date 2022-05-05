@@ -62,24 +62,24 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ### Exposure parameters
 
-| Name                        | Description                                                                               | Value                             |
-| --------------------------- | ----------------------------------------------------------------------------------------- |---------------------------------- |
-| `replicaCount`              | Specify number of clusternet-scheduler replicas                                           | `3`                               |
-| `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `"clusternet-scheduler"`          |
-| `image.registry`            | clusternet-scheduler image registry                                                       | `ghcr.io`                         |
+| Name                        | Description                                                                               | Value                        |
+| --------------------------- | ----------------------------------------------------------------------------------------- |------------------------------|
+| `replicaCount`              | Specify number of clusternet-scheduler replicas                                           | `3`                          |
+| `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `"clusternet-scheduler"`     |
+| `image.registry`            | clusternet-scheduler image registry                                                       | `ghcr.io`                    |
 | `image.repository`          | clusternet-scheduler image repository                                                     | `clusternet/clusternet-scheduler` |
-| `image.tag`                 | clusternet-scheduler image tag (immutable tags are recommended)                           | `v0.8.0`                          |
-| `image.pullPolicy`          | clusternet-scheduler image pull policy                                                    | `IfNotPresent`                    |
-| `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                              |
-| `extraArgs`                 | Additional command line arguments to pass to clusternet-scheduler                         | `{"v":4}`                         |
-| `resources.limits`          | The resources limits for the container                                                    | `{}`                              |
-| `resources.requests`        | The requested resources for the container                                                 | `{}`                              |
-| `nodeSelector`              | Node labels for pod assignment                                                            | `{}`                              |
-| `priorityClassName`         | Set Priority Class Name to allow priority control over other pods                         | `""`                              |
-| `tolerations`               | Tolerations for pod assignment                                                            | `[]`                              |
-| `podAffinityPreset`         | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`       | `""`                              |
-| `podAntiAffinityPreset`     | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`  | `soft`                            |
-| `nodeAffinityPreset.type`   | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`                              |
-| `nodeAffinityPreset.key`    | Node label key to match. Ignored if `affinity` is set.                                    | `""`                              |
-| `nodeAffinityPreset.values` | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                              |
-| `affinity`                  | Affinity for pod assignment                                                               | `{}`                              |
+| `image.tag`                 | clusternet-scheduler image tag (immutable tags are recommended)                           | `v0.10.0`                    |
+| `image.pullPolicy`          | clusternet-scheduler image pull policy                                                    | `IfNotPresent`               |
+| `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                         |
+| `extraArgs`                 | Additional command line arguments to pass to clusternet-scheduler                         | `{}`                         |
+| `resources.limits`          | The resources limits for the container                                                    | `{}`                         |
+| `resources.requests`        | The requested resources for the container                                                 | `{}`                         |
+| `nodeSelector`              | Node labels for pod assignment                                                            | `{}`                         |
+| `priorityClassName`         | Set Priority Class Name to allow priority control over other pods                         | `""`                         |
+| `tolerations`               | Tolerations for pod assignment                                                            | `[]`                         |
+| `podAffinityPreset`         | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`       | `""`                         |
+| `podAntiAffinityPreset`     | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`  | `soft`                       |
+| `nodeAffinityPreset.type`   | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`                         |
+| `nodeAffinityPreset.key`    | Node label key to match. Ignored if `affinity` is set.                                    | `""`                         |
+| `nodeAffinityPreset.values` | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                         |
+| `affinity`                  | Affinity for pod assignment                                                               | `{}`                         |
