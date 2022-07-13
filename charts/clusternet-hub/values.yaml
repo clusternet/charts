@@ -19,7 +19,7 @@ commonAnnotations: {}
 ## @section Clusternet Parameters
 ## @param replicaCount Number of clusternet-hub replicas desired
 ##
-replicaCount: 1
+replicaCount: 3
 serviceAccount:
   ## @param serviceAccount.name The name of the ServiceAccount to create
   ## If not set, a name is generated using the common.names.fullname template
@@ -27,6 +27,8 @@ serviceAccount:
 ## @param securePort Port where clusternet-hub will be running
 ##
 securePort: 443
+## @param peerPort Port where clusternet-hub peer will be advertised
+peerPort: 8123
 ## @param image.registry clusternet-hub image registry
 ## @param image.repository clusternet-hub image repository
 ## @param image.tag clusternet-hub image tag (immutable tags are recommended)
@@ -36,7 +38,7 @@ securePort: 443
 image:
   registry: ghcr.io
   repository: clusternet/clusternet-hub
-  tag: v0.10.0
+  tag: v0.11.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images

@@ -1,37 +1,4 @@
-# Clusternet Hub
-
-## TL;DR
-
-```console
-$ helm repo add clusternet https://clusternet.github.io/charts
-$ helm install clusternet-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
-```
-
-### Create Auth Token
-
-- If bootstrapping authentication is supported, i.e. `--enable-bootstrap-token-auth=true` is explicitly set in the
-  kube-apiserver running in parent cluster.
-
-```console
-$ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
-```
-
-- If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s) ,
-  i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
-
-```console
-# this will create a serviceaccount token
-$ kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_serviceaccount_token.yaml
-```
-
-### Get ServiceAccount Token from parent cluster
-
-```console
-$ kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annotations.kubernetes\.io/service-account\.name=="cluster-bootstrap-use")].data.token}' | base64 --decode; echo
-HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
-```
-
-## Introduction
+# How to install clusternet-hub
 
 `clusternet-hub` is responsible for
 
@@ -52,7 +19,40 @@ HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
 - Kubernetes 1.18+
 - Helm 3.1.0
 
-## Installing the Chart
+## TL;DR
+
+```bash
+helm repo add clusternet https://clusternet.github.io/charts
+helm install clusternet-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
+```
+
+### Create Auth Token
+
+- If bootstrapping authentication is supported, i.e. `--enable-bootstrap-token-auth=true` is explicitly set in the
+  kube-apiserver running in parent cluster.
+
+  ```bash
+  kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
+  ```
+
+- If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s) ,
+  i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
+
+  ```bash
+  # this will create a serviceaccount token
+  kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_serviceaccount_token.yaml
+  ```
+
+### Get ServiceAccount Token from parent cluster
+
+```bash
+kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annotations.kubernetes\.io/service-account\.name=="cluster-bootstrap-use")].data.token}' | base64 --decode; echo
+# HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
+```
+
+## Step-by-step Installation & Uninstallation
+
+### Installing the Chart
 
 > Note:
 > The images are synced to [dockerhub](https://hub.docker.com/u/clusternet) as well,
@@ -60,7 +60,7 @@ HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
 
 To install the chart with the release name `clusternet-hub`:
 
-```console
+```bash
 helm repo add clusternet https://clusternet.github.io/charts
 helm install clusternet-hub -n clusternet-system --create-namespace clusternet/clusternet-hub
 kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
@@ -71,19 +71,19 @@ The [Parameters](#parameters) section lists the parameters that can be configure
 
 > **Tip**: List all releases using `helm list -A`
 
-## Uninstalling the Chart
+### Uninstalling the Chart
 
 To uninstall/delete the `clusternet-hub` deployment:
 
-```console
+```bash
 helm delete clusternet-hub -n clusternet-system
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
-## Parameters
+### Parameters
 
-### Common parameters
+#### Common parameters
 
 | Name                | Description                                        | Value |
 | ------------------- | -------------------------------------------------- | ----- |
@@ -93,16 +93,17 @@ The command removes all the Kubernetes components associated with the chart and 
 | `commonLabels`      | Labels to add to all deployed objects              | `{}`  |
 | `commonAnnotations` | Annotations to add to all deployed objects         | `{}`  |
 
-### Exposure parameters
+#### Exposure parameters
 
 | Name                        | Description                                                                               | Value                                                                                                               |
-| --------------------------- | ----------------------------------------------------------------------------------------- |---------------------------------------------------------------------------------------------------------------------|
-| `replicaCount`              | Specify number of clusternet-hub replicas                                                 | `1`                                                                                                                 |
+|-----------------------------| ----------------------------------------------------------------------------------------- |---------------------------------------------------------------------------------------------------------------------|
+| `replicaCount`              | Specify number of clusternet-hub replicas                                                 | `3`                                                                                                                 |
 | `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `"clusternet-hub"`                                                                                                  |
 | `securePort`                | Port where clusternet-hub will be running                                                 | `443`                                                                                                               |
+| `peerPort`                  | Port where clusternet-hub peer will be advertised                                         | `8123`                                                                                                              |
 | `image.registry`            | clusternet-hub image registry                                                             | `ghcr.io`                                                                                                           |
 | `image.repository`          | clusternet-hub image repository                                                           | `clusternet/clusternet-hub`                                                                                         |
-| `image.tag`                 | clusternet-hub image tag (immutable tags are recommended)                                 | `v0.10.0`                                                                                                          |
+| `image.tag`                 | clusternet-hub image tag (immutable tags are recommended)                                 | `v0.11.0`                                                                                                           |
 | `image.pullPolicy`          | clusternet-hub image pull policy                                                          | `IfNotPresent`                                                                                                      |
 | `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                                                                                                                |
 | `reservedNamespace`         | Reserved namespace used for creating Manifest by clusternet-hub                           | `clusternet-reserved`                                                                                               |
