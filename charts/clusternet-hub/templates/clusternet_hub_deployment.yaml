@@ -116,16 +116,28 @@ spec:
             - name: SYSTEM_NAMESPACE
               valueFrom:
                 fieldRef:
+                  apiVersion: v1
                   fieldPath: metadata.namespace
             - name: RESERVED_NAMESPACE
               value: {{ .Values.reservedNamespace }}
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+          ports:
+            - name: peer
+              containerPort: 8123
+              protocol: TCP
           command:
             - /usr/local/bin/clusternet-hub
           args:
+            - --bind-address=$(POD_IP)
             - --secure-port={{ .Values.securePort }}
             - --anonymous-auth-supported={{ .Values.anonymousAuthSupported }}
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
             - --reserved-namespace=$(RESERVED_NAMESPACE)
+            - --peer-port={{ .Values.peerPort }}
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}

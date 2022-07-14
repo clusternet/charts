@@ -4,7 +4,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -50,3 +51,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+#
+charts/*/charts/*.tgz

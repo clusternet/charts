@@ -45,7 +45,7 @@ serviceAccount:
 image:
   registry: ghcr.io
   repository: clusternet/clusternet-agent
-  tag: v0.10.0
+  tag: v0.11.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -67,8 +67,11 @@ image:
 ##  cluster-reg-name: <your-cluster-name>
 ##
 extraArgs:
-  feature-gates: "SocketConnection=true,AppPusher=true,Recovery=true"
+  feature-gates: "SocketConnection=true,AppPusher=true,Recovery=true,Predictor=true"
   cluster-sync-mode: Dual
+  use-metrics-server: false
+  predictor-direct-access: false
+  predictor-port: 8080
 ## Container resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ## We usually recommend not to specify default resources and to leave this as a conscious
