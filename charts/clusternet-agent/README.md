@@ -20,7 +20,6 @@ helm repo add clusternet https://clusternet.github.io/charts
 helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=PLEASE-CHANGE-ME \
   --set registrationToken=PLEASE-CHANGE-ME \
-  --set extraArgs.cluster-reg-name=PLEASE-CHANGE-ME \
   clusternet/clusternet-agent
 ```
 
@@ -30,7 +29,6 @@ Please update `PLEASE-CHANGE-ME` to your valid configurations, such as,
 helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=07401b.f395accd246ae52d \
-  --set extraArgs.cluster-reg-name=mycluster \
   clusternet/clusternet-agent
 ```
 
@@ -43,7 +41,6 @@ i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please 
 helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=Parent-Cluster-ServiceAccount-Token \
-  --set extraArgs.cluster-reg-name=mycluster \
   clusternet/clusternet-agent
 ```
 
@@ -62,7 +59,6 @@ helm repo add clusternet https://clusternet.github.io/charts
 helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=PLEASE-CHANGE-ME \
   --set registrationToken=PLEASE-CHANGE-ME \
-  --set extraArgs.cluster-reg-name=PLEASE-CHANGE-ME \
   clusternet/clusternet-agent
 ```
 
@@ -72,11 +68,8 @@ Please update `PLEASE-CHANGE-ME` to your valid configurations, such as,
 helm install clusternet-agent -n clusternet-system --create-namespace \
   --set parentURL=https://192.168.10.10:6443 \
   --set registrationToken=07401b.f395accd246ae52d \
-  --set extraArgs.cluster-reg-name=mycluster \
   clusternet/clusternet-agent
 ```
-
-`extraArgs.cluster-reg-name` is optional, if not set, clusternet-agent will generate a random name.
 
 These commands deploy `clusternet-agent` on the Kubernetes cluster in the default configuration.
 The [Parameters](#parameters) section lists the parameters that can be configured during installation.
@@ -107,26 +100,31 @@ The command removes all the Kubernetes components associated with the chart and 
 
 #### Exposure parameters
 
-| Name                        | Description                                                                               | Value                                                                                                                                         |
-| --------------------------- | ----------------------------------------------------------------------------------------- |-----------------------------------------------------------------------------------------------------------------------------------------------|
-| `parentURL`                 | The apiserver address of parent cluster                                                   | `""`                                                                                                                                          |
-| `registrationToken`         | The bootstrap token used by cluster registration                                          | `""`                                                                                                                                          |
-| `replicaCount`              | Specify number of clusternet-agent replicas                                               | `3`                                                                                                                                           |
-| `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `"clusternet-agent"`                                                                                                                          |
-| `image.registry`            | clusternet-agent image registry                                                           | `ghcr.io`                                                                                                                                     |
-| `image.repository`          | clusternet-agent image repository                                                         | `clusternet/clusternet-agent`                                                                                                                 |
-| `image.tag`                 | clusternet-agent image tag (immutable tags are recommended)                               | `v0.11.0`                                                                                                                                    |
-| `image.pullPolicy`          | clusternet-agent image pull policy                                                        | `IfNotPresent`                                                                                                                                |
-| `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                                                                                                                                          |
-| `extraArgs`                 | Additional command line arguments to pass to clusternet-agent                             | `{"feature-gates":"SocketConnection=true,AppPusher=true,Recovery=true,Predictor=true","cluster-sync-mode":"Dual","use-metrics-server":false}` |
-| `resources.limits`          | The resources limits for the container                                                    | `{}`                                                                                                                                          |
-| `resources.requests`        | The requested resources for the container                                                 | `{}`                                                                                                                                          |
-| `nodeSelector`              | Node labels for pod assignment                                                            | `{}`                                                                                                                                          |
-| `priorityClassName`         | Set Priority Class Name to allow priority control over other pods                         | `""`                                                                                                                                          |
-| `tolerations`               | Tolerations for pod assignment                                                            | `[]`                                                                                                                                          |
-| `podAffinityPreset`         | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`       | `""`                                                                                                                                          |
-| `podAntiAffinityPreset`     | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`  | `soft`                                                                                                                                        |
-| `nodeAffinityPreset.type`   | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`                                                                                                                                          |
-| `nodeAffinityPreset.key`    | Node label key to match. Ignored if `affinity` is set.                                    | `""`                                                                                                                                          |
-| `nodeAffinityPreset.values` | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                                                                                                                                          |
-| `affinity`                  | Affinity for pod assignment                                                               | `{}`                                                                                                                                          |
+| Name                              | Description                                                                               | Value                                                               |
+| --------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `parentURL`                       | The apiserver address of parent cluster                                                   | `""`                                                                |
+| `registrationToken`               | The bootstrap token used by cluster registration                                          | `""`                                                                |
+| `replicaCount`                    | Specify number of clusternet-agent replicas                                               | `3`                                                                 |
+| `serviceAccount.name`             | The name of the ServiceAccount to create                                                  | `"clusternet-agent"`                                                |
+| `image.registry`                  | clusternet-agent image registry                                                           | `ghcr.io`                                                           |
+| `image.repository`                | clusternet-agent image repository                                                         | `clusternet/clusternet-agent`                                       |
+| `image.tag`                       | clusternet-agent image tag (immutable tags are recommended)                               | `v0.11.0`                                                           |
+| `image.pullPolicy`                | clusternet-agent image pull policy                                                        | `IfNotPresent`                                                      |
+| `image.pullSecrets`               | Specify docker-registry secret names as an array                                          | `[]`                                                                |
+| `extraArgs.feature-gates`         | Feature gates are a set of key=value pairs that describe clusternet-agent features.       | `SocketConnection=true,AppPusher=true,Recovery=true,Predictor=true` |
+| `extraArgs.cluster-sync-mode`     | Specify the sync mode 'Pull', 'Push' and 'Dual' between parent cluster and child cluster  | `Dual`                                                              |
+| `extraArgs.use-metrics-server`    | Use metrics server                                                                        | `false`                                                             |
+| `extraArgs.cluster-reg-name`      | Specify the cluster registration name                                                     | `mycluster`                                                         |
+| `extraArgs.cluster-reg-namespace` | Specify the cluster registration namespace                                                | `mycluster-ns`                                                      |
+| `resources.limits`                | The resources limits for the container                                                    | `{}`                                                                |
+| `resources.requests`              | The requested resources for the container                                                 | `{}`                                                                |
+| `nodeSelector`                    | Node labels for pod assignment                                                            | `{}`                                                                |
+| `priorityClassName`               | Set Priority Class Name to allow priority control over other pods                         | `""`                                                                |
+| `hostNetwork`                     | Specify whether to use the host's networking stack                                        | `false`                                                             |
+| `tolerations`                     | Tolerations for pod assignment                                                            | `[]`                                                                |
+| `podAffinityPreset`               | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`       | `""`                                                                |
+| `podAntiAffinityPreset`           | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`  | `soft`                                                              |
+| `nodeAffinityPreset.type`         | Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard` | `""`                                                                |
+| `nodeAffinityPreset.key`          | Node label key to match. Ignored if `affinity` is set.                                    | `""`                                                                |
+| `nodeAffinityPreset.values`       | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                                                                |
+| `affinity`                        | Affinity for pod assignment                                                               | `{}`                                                                |

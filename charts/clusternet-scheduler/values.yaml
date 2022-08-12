@@ -73,6 +73,12 @@ resources:
   ##    cpu: 100m
   ##    memory: 25Mi
   requests: {}
+## @param hostNetwork Specify whether to use the host's networking stack.
+## If set to true, the agent will use the host's networking stack.
+## If set to false, the agent will use the cluster's networking stack.
+## ref: https://kubernetes.io/docs/concepts/security/pod-security-policy/#host-namespaces
+##
+hostNetwork: false
 ## @param nodeSelector Node labels for pod assignment
 ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
 ##
