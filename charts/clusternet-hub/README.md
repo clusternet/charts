@@ -96,7 +96,7 @@ The command removes all the Kubernetes components associated with the chart and 
 #### Exposure parameters
 
 | Name                        | Description                                                                               | Value                                                                                                               |
-|-----------------------------| ----------------------------------------------------------------------------------------- |---------------------------------------------------------------------------------------------------------------------|
+| --------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `replicaCount`              | Specify number of clusternet-hub replicas                                                 | `3`                                                                                                                 |
 | `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `"clusternet-hub"`                                                                                                  |
 | `securePort`                | Port where clusternet-hub will be running                                                 | `443`                                                                                                               |
@@ -113,6 +113,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `resources.requests`        | The requested resources for the container                                                 | `{}`                                                                                                                |
 | `nodeSelector`              | Node labels for pod assignment                                                            | `{}`                                                                                                                |
 | `priorityClassName`         | Set Priority Class Name to allow priority control over other pods                         | `""`                                                                                                                |
+| `hostNetwork`               | Specify whether to use the host's networking stack                                        | `false`                                                                                                             |
 | `tolerations`               | Tolerations for pod assignment                                                            | `[]`                                                                                                                |
 | `podAffinityPreset`         | Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`       | `""`                                                                                                                |
 | `podAntiAffinityPreset`     | Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`  | `soft`                                                                                                              |
