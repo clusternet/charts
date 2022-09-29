@@ -59,6 +59,8 @@ image:
   ##   - myRegistryKeySecretName
   ##
   pullSecrets: []
+## @param leaderElect Enable or disable leader elect
+leaderElect: true
 ## @param extraArgs Additional command line arguments to pass to clusternet-agent
 ## e.g:
 ##  v: 4
