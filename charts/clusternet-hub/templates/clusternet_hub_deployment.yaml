@@ -136,6 +136,7 @@ spec:
             - --bind-address=$(POD_IP)
             - --secure-port={{ .Values.securePort }}
             - --anonymous-auth-supported={{ .Values.anonymousAuthSupported }}
+            - --leader-elect={{ .Values.leaderElect }}
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
             - --reserved-namespace=$(RESERVED_NAMESPACE)
             - --peer-port={{ .Values.peerPort }}

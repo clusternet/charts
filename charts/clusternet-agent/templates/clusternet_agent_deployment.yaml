@@ -101,6 +101,7 @@ spec:
           args:
             - --cluster-reg-token=$(REG_TOKEN)
             - --cluster-reg-parent-url=$(PARENT_URL)
+            - --leader-elect={{ .Values.leaderElect }}
             - --leader-elect-resource-namespace=$(AGENT_NAMESPACE)
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}

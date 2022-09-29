@@ -51,6 +51,8 @@ image:
   ##   - myRegistryKeySecretName
   ##
   pullSecrets: []
+## @param leaderElect Enable or disable leader elect
+leaderElect: true
 ## @param extraArgs Additional command line arguments to pass to clusternet-scheduler
 extraArgs: {}
 ## Container resource requests and limits

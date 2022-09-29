@@ -69,6 +69,7 @@ spec:
           command:
             - /usr/local/bin/clusternet-scheduler
           args:
+            - --leader-elect={{ .Values.leaderElect }}
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}

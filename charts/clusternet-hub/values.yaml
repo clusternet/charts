@@ -56,6 +56,8 @@ image:
 reservedNamespace: clusternet-reserved
 ## @param anonymousAuthSupported Whether the anonymous access is allowed by the 'core' kubernetes server
 anonymousAuthSupported: true
+## @param leaderElect Enable or disable leader elect
+leaderElect: true
 ## @param extraArgs Additional command line arguments to pass to clusternet-hub
 ## e.g:
 ##  v: 4
