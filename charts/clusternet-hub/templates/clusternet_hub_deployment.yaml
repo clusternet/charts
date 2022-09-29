@@ -58,6 +58,7 @@ metadata:
 spec:
   ports:
     - port: 443
+      name: https
       protocol: TCP
       targetPort: {{ .Values.securePort }}
   selector: {{- include "common.labels.matchLabels" . | nindent 4 }}
@@ -121,11 +122,6 @@ spec:
                   fieldPath: metadata.namespace
             - name: RESERVED_NAMESPACE
               value: {{ .Values.reservedNamespace }}
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.podIP
           ports:
             - name: peer
               containerPort: 8123
@@ -133,7 +129,6 @@ spec:
           command:
             - /usr/local/bin/clusternet-hub
           args:
-            - --bind-address=$(POD_IP)
             - --secure-port={{ .Values.securePort }}
             - --anonymous-auth-supported={{ .Values.anonymousAuthSupported }}
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
