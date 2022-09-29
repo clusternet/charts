@@ -63,12 +63,12 @@ The command removes all the Kubernetes components associated with the chart and 
 #### Exposure parameters
 
 | Name                        | Description                                                                               | Value                             |
-| --------------------------- | ----------------------------------------------------------------------------------------- | --------------------------------- |
+| --------------------------- | ----------------------------------------------------------------------------------------- |-----------------------------------|
 | `replicaCount`              | Specify number of clusternet-scheduler replicas                                           | `3`                               |
 | `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `clusternet-scheduler`            |
 | `image.registry`            | clusternet-scheduler image registry                                                       | `ghcr.io`                         |
 | `image.repository`          | clusternet-scheduler image repository                                                     | `clusternet/clusternet-scheduler` |
-| `image.tag`                 | clusternet-scheduler image tag (immutable tags are recommended)                           | `v0.11.0`                         |
+| `image.tag`                 | clusternet-scheduler image tag (immutable tags are recommended)                           | `v0.12.0`                         |
 | `image.pullPolicy`          | clusternet-scheduler image pull policy                                                    | `IfNotPresent`                    |
 | `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                              |
 | `extraArgs`                 | Additional command line arguments to pass to clusternet-scheduler                         | `{}`                              |
