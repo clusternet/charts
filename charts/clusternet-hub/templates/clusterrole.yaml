@@ -14,4 +14,4 @@ rules:
     resources: ['*']
     verbs: ["*"]
   - nonResourceURLs: ['*']
-    verbs: ["get"]
+    verbs: ["get", "list"]
