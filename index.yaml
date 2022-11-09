@@ -390,6 +390,28 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: v0.12.0
+    created: "2022-11-09T06:27:21.336764032Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for clusternet-hub
+    digest: 0670e7d7a4a3975bd4acf8cde0a0e94a6789d85055cfe7a50cd5b8c60cfbf902
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    keywords:
+    - clusternet
+    - cluster management
+    name: clusternet-hub
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-hub-0.9.1/clusternet-hub-0.9.1.tgz
+    version: 0.9.1
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: v0.12.0
     created: "2022-09-29T10:21:41.195036314Z"
     dependencies:
     - name: common
@@ -935,4 +957,4 @@ entries:
     urls:
     - https://github.com/clusternet/charts/releases/download/clusternet-scheduler-0.3.0/clusternet-scheduler-0.3.0.tgz
     version: 0.3.0
-generated: "2022-11-08T05:56:07.99979989Z"
+generated: "2022-11-09T06:27:21.336957635Z"
