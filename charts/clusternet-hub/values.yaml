@@ -58,13 +58,12 @@ reservedNamespace: clusternet-reserved
 anonymousAuthSupported: true
 ## @param leaderElect Enable or disable leader elect
 leaderElect: true
+## @param featureGates Enable or disable feature gates
+featureGates: "SocketConnection=true,Deployer=true,ShadowAPI=true,FeedInUseProtection=true,FeedInventory=true"
 ## @param extraArgs Additional command line arguments to pass to clusternet-hub
 ## e.g:
 ##  v: 4
-##  feature-gates: "SocketConnection=true,Deployer=true,ShadowAPI=true,FeedInUseProtection=true"
-##
-extraArgs:
-  feature-gates: "SocketConnection=true,Deployer=true,ShadowAPI=true,FeedInUseProtection=true,FeedInventory=true"
+extraArgs: {}
 ## Container resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ## We usually recommend not to specify default resources and to leave this as a conscious

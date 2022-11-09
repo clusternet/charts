@@ -109,6 +109,11 @@ spec:
       tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ template "clusternet-hub.serviceAccountName" . }}
+      volumes:
+        - hostPath:
+            path: /etc/clusternet
+            type: DirectoryOrCreate
+          name: clusternet
       containers:
         - name: clusternet-hub
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global) }}
@@ -135,6 +140,7 @@ spec:
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
             - --reserved-namespace=$(RESERVED_NAMESPACE)
             - --peer-port={{ .Values.peerPort }}
+            - --feature-gates={{ .Values.featureGates }}
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}
@@ -142,3 +148,7 @@ spec:
             - --{{ $key }}
             {{- end }}
             {{- end }}
+          volumeMounts:
+            - mountPath: /etc/clusternet
+              name: clusternet
+              readOnly: true
