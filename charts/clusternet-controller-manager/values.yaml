@@ -61,7 +61,7 @@ anonymousAuthSupported: true
 ## @param leaderElect Enable or disable leader elect
 leaderElect: true
 ## @param featureGates Enable or disable feature gates
-featureGates: "SocketConnection=true,Deployer=true,ShadowAPI=true,FeedInUseProtection=true,FeedInventory=true"
+featureGates: "SocketConnection=true,Deployer=true,FeedInUseProtection=true,FeedInventory=true"
 ## @param extraArgs Additional command line arguments to pass to clusternet-controller-manager
 ## e.g:
 ##  v: 4
