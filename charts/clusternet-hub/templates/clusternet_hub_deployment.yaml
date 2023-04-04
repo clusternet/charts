@@ -131,6 +131,9 @@ spec:
             - name: peer
               containerPort: 8123
               protocol: TCP
+            - name: https
+              containerPort: 443
+              protocol: TCP
           command:
             - /usr/local/bin/clusternet-hub
           args:

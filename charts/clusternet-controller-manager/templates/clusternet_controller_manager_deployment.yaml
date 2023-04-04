@@ -13,30 +13,6 @@ metadata:
     {{- end }}
 
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "common.names.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  annotations:
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    app: {{ include "common.names.fullname" . }}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-spec:
-  ports:
-    - port: 443
-      name: https
-      protocol: TCP
-      targetPort: {{ .Values.securePort }}
-  selector: {{- include "common.labels.matchLabels" . | nindent 4 }}
-    app: {{ include "common.names.fullname" . }}
-
----
 apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
@@ -100,8 +76,8 @@ spec:
             - name: RESERVED_NAMESPACE
               value: {{ .Values.reservedNamespace }}
           ports:
-            - name: peer
-              containerPort: 8123
+            - name: https
+              containerPort: 443
               protocol: TCP
           command:
             - /usr/local/bin/clusternet-controller-manager
