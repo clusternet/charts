@@ -27,11 +27,10 @@ serviceAccount:
 ## @param securePort Port where clusternet-controller-manager will be running
 ##
 securePort: 443
-## @param peerPort Port where clusternet-controller-manager peer will be advertised
-peerPort: 8123
+
 ## @param controller a list of controllers to enable
 ##
-controller: *
+controller: "*"
 ## @param image.registry clusternet-controller-manager image registry
 ## @param image.repository clusternet-controller-manager image repository
 ## @param image.tag clusternet-controller-manager image tag (immutable tags are recommended)
