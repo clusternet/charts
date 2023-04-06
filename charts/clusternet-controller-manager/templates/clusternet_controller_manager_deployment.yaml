@@ -77,7 +77,7 @@ spec:
               value: {{ .Values.reservedNamespace }}
           ports:
             - name: https
-              containerPort: 443
+              containerPort: {{ .Values.securePort }}
               protocol: TCP
           command:
             - /usr/local/bin/clusternet-controller-manager
@@ -88,7 +88,7 @@ spec:
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
             - --reserved-namespace=$(RESERVED_NAMESPACE)
             - --feature-gates={{ .Values.featureGates }}
-            - --controller={{ .Values.controller }}
+            - --controllers={{ .Values.controllers }}
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}
