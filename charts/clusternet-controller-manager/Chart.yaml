@@ -1,14 +1,14 @@
 apiVersion: v2
-name: clusternet-hub
-home: https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
-description: Chart for clusternet-hub
+name: clusternet-controller-manager
+home: https://github.com/clusternet/charts/tree/main/charts/clusternet-controller-manager
+description: Chart for clusternet-controller-manager
 annotations:
   category: Infrastructure
 keywords:
   - clusternet
   - cluster management
 sources:
-  - https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+  - https://github.com/clusternet/charts/tree/main/charts/clusternet-controller-manager
 
 # A chart can be either an 'application' or a 'library' chart.
 #

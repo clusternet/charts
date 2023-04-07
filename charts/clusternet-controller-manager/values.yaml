@@ -17,27 +17,29 @@ commonLabels: {}
 commonAnnotations: {}
 
 ## @section Clusternet Parameters
-## @param replicaCount Number of clusternet-hub replicas desired
+## @param replicaCount Number of clusternet-controller-manager replicas desired
 ##
 replicaCount: 3
 serviceAccount:
   ## @param serviceAccount.name The name of the ServiceAccount to create
   ## If not set, a name is generated using the common.names.fullname template
-  name: "clusternet-hub"
-## @param securePort Port where clusternet-hub will be running
+  name: "clusternet-controller-manager"
+## @param securePort Port where clusternet-controller-manager will be running
 ##
 securePort: 443
-## @param peerPort Port where clusternet-hub peer will be advertised
-peerPort: 8123
-## @param image.registry clusternet-hub image registry
-## @param image.repository clusternet-hub image repository
-## @param image.tag clusternet-hub image tag (immutable tags are recommended)
-## @param image.pullPolicy clusternet-hub image pull policy
+
+## @param controller a list of controllers to enable
+##
+controllers: "*"
+## @param image.registry clusternet-controller-manager image registry
+## @param image.repository clusternet-controller-manager image repository
+## @param image.tag clusternet-controller-manager image tag (immutable tags are recommended)
+## @param image.pullPolicy clusternet-controller-manager image pull policy
 ## @param image.pullSecrets Specify docker-registry secret names as an array
 ##
 image:
   registry: ghcr.io
-  repository: clusternet/clusternet-hub
+  repository: clusternet/clusternet-controller-manager
   tag: v0.15.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
@@ -52,15 +54,15 @@ image:
   ##   - myRegistryKeySecretName
   ##
   pullSecrets: []
-## @param reservedNamespace Reserved namespace used for creating Manifest by clusternet-hub
+## @param reservedNamespace Reserved namespace used for creating Manifest by clusternet-controller-manager
 reservedNamespace: clusternet-reserved
 ## @param anonymousAuthSupported Whether the anonymous access is allowed by the 'core' kubernetes server
 anonymousAuthSupported: true
 ## @param leaderElect Enable or disable leader elect
 leaderElect: true
 ## @param featureGates Enable or disable feature gates
-featureGates: "SocketConnection=true,ShadowAPI=true"
-## @param extraArgs Additional command line arguments to pass to clusternet-hub
+featureGates: "SocketConnection=true,Deployer=true,FeedInUseProtection=true,FeedInventory=true"
+## @param extraArgs Additional command line arguments to pass to clusternet-controller-manager
 ## e.g:
 ##  v: 4
 extraArgs: {}

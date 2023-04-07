@@ -1,20 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: clusternet-reserved
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-
----
 kind: ServiceAccount
 apiVersion: v1
 metadata:
-  name: {{ template "clusternet-hub.serviceAccountName" . }}
+  name: {{ template "clusternet-controller-manager.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
   annotations:
     {{- if .Values.commonAnnotations }}
@@ -24,45 +11,6 @@ metadata:
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
-
----
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  name: clusternet-hub-proxy
-  namespace: {{ .Release.Namespace }}
-  annotations:
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "common.names.fullname" . }}
-  namespace: {{ .Release.Namespace }}
-  annotations:
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    app: {{ include "common.names.fullname" . }}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-spec:
-  ports:
-    - port: 443
-      name: https
-      protocol: TCP
-      targetPort: {{ .Values.securePort }}
-  selector: {{- include "common.labels.matchLabels" . | nindent 4 }}
-    app: {{ include "common.names.fullname" . }}
 
 ---
 apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
@@ -108,14 +56,14 @@ spec:
       {{- if .Values.tolerations}}
       tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ template "clusternet-hub.serviceAccountName" . }}
+      serviceAccountName: {{ template "clusternet-controller-manager.serviceAccountName" . }}
       volumes:
         - hostPath:
             path: /etc/clusternet
             type: DirectoryOrCreate
           name: clusternet
       containers:
-        - name: clusternet-hub
+        - name: clusternet-controller-manager
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources: {{- toYaml .Values.resources | nindent 12 }}
@@ -128,21 +76,19 @@ spec:
             - name: RESERVED_NAMESPACE
               value: {{ .Values.reservedNamespace }}
           ports:
-            - name: peer
-              containerPort: 8123
-              protocol: TCP
             - name: https
-              containerPort: 443
+              containerPort: {{ .Values.securePort }}
               protocol: TCP
           command:
-            - /usr/local/bin/clusternet-hub
+            - /usr/local/bin/clusternet-controller-manager
           args:
             - --secure-port={{ .Values.securePort }}
+            - --anonymous-auth-supported={{ .Values.anonymousAuthSupported }}
             - --leader-elect={{ .Values.leaderElect }}
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
             - --reserved-namespace=$(RESERVED_NAMESPACE)
-            - --peer-port={{ .Values.peerPort }}
             - --feature-gates={{ .Values.featureGates }}
+            - --controllers={{ .Values.controllers }}
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}
