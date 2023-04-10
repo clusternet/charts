@@ -144,11 +144,7 @@ spec:
             - --peer-port={{ .Values.peerPort }}
             - --feature-gates={{ .Values.featureGates }}
             {{- range $key, $value := .Values.extraArgs }}
-            {{- if $value }}
             - --{{ $key }}={{ $value }}
-            {{- else }}
-            - --{{ $key }}
-            {{- end }}
             {{- end }}
           volumeMounts:
             - mountPath: /etc/clusternet
