@@ -120,9 +120,5 @@ spec:
             - --leader-elect={{ .Values.leaderElect }}
             - --leader-elect-resource-namespace=$(AGENT_NAMESPACE)
             {{- range $key, $value := .Values.extraArgs }}
-            {{- if $value }}
             - --{{ $key }}={{ $value }}
-            {{- else }}
-            - --{{ $key }}
-            {{- end }}
             {{- end }}
