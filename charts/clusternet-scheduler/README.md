@@ -68,7 +68,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `clusternet-scheduler`            |
 | `image.registry`            | clusternet-scheduler image registry                                                       | `ghcr.io`                         |
 | `image.repository`          | clusternet-scheduler image repository                                                     | `clusternet/clusternet-scheduler` |
-| `image.tag`                 | clusternet-scheduler image tag (immutable tags are recommended)                           | `v0.15.0`                         |
+| `image.tag`                 | clusternet-scheduler image tag (immutable tags are recommended)                           | `v0.15.1`                         |
 | `image.pullPolicy`          | clusternet-scheduler image pull policy                                                    | `IfNotPresent`                    |
 | `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                              |
 | `extraArgs`                 | Additional command line arguments to pass to clusternet-scheduler                         | `{}`                              |
