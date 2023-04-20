@@ -61,7 +61,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `controller`                | Controller a list of controllers to enable                                                | `"*"`                                                                             |
 | `image.registry`            | clusternet-controller-manager image registry                                              | `ghcr.io`                                                                         |
 | `image.repository`          | clusternet-controller-manager image repository                                            | `clusternet/clusternet-controller-manager`                                        |
-| `image.tag`                 | clusternet-controller-manager image tag (immutable tags are recommended)                  | `v0.15.0`                                                                         |
+| `image.tag`                 | clusternet-controller-manager image tag (immutable tags are recommended)                  | `v0.15.1`                                                                         |
 | `image.pullPolicy`          | clusternet-controller-manager image pull policy                                           | `IfNotPresent`                                                                    |
 | `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                                                                              |
 | `reservedNamespace`         | Reserved namespace used for creating Manifest by clusternet-controller-manager            | `clusternet-reserved`                                                             |

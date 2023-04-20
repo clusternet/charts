@@ -108,7 +108,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `serviceAccount.name`             | The name of the ServiceAccount to create                                                  | `"clusternet-agent"`                                                |
 | `image.registry`                  | clusternet-agent image registry                                                           | `ghcr.io`                                                           |
 | `image.repository`                | clusternet-agent image repository                                                         | `clusternet/clusternet-agent`                                       |
-| `image.tag`                       | clusternet-agent image tag (immutable tags are recommended)                               | `v0.15.0`                                                           |
+| `image.tag`                       | clusternet-agent image tag (immutable tags are recommended)                               | `v0.15.1`                                                           |
 | `image.pullPolicy`                | clusternet-agent image pull policy                                                        | `IfNotPresent`                                                      |
 | `image.pullSecrets`               | Specify docker-registry secret names as an array                                          | `[]`                                                                |
 | `extraArgs.feature-gates`         | Feature gates are a set of key=value pairs that describe clusternet-agent features.       | `SocketConnection=true,AppPusher=true,Recovery=true,Predictor=true` |
