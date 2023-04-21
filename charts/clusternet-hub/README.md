@@ -103,7 +103,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `peerPort`                  | Port where clusternet-hub peer will be advertised                                         | `8123`                                 |
 | `image.registry`            | clusternet-hub image registry                                                             | `ghcr.io`                              |
 | `image.repository`          | clusternet-hub image repository                                                           | `clusternet/clusternet-hub`            |
-| `image.tag`                 | clusternet-hub image tag (immutable tags are recommended)                                 | `v0.15.1`                              |
+| `image.tag`                 | clusternet-hub image tag (immutable tags are recommended)                                 | `v0.15.2`                              |
 | `image.pullPolicy`          | clusternet-hub image pull policy                                                          | `IfNotPresent`                         |
 | `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                                   |
 | `reservedNamespace`         | Reserved namespace used for creating Manifest by clusternet-hub                           | `clusternet-reserved`                  |

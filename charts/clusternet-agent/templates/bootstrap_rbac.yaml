@@ -60,8 +60,8 @@ rules:
     resources: [ "endpointslices" ]
     verbs: [ "get", "list", "watch" ]
   - apiGroups: [ "multicluster.x-k8s.io" ]
-    resources: [ "serviceexports", "serviceimports" ]
-    verbs: [ "get", "list", "watch" ]
+    resources: [ "serviceexports" ]
+    verbs: [ "get", "list", "watch", "update", "patch" ]
   - nonResourceURLs: [ "*" ]
     verbs: [ "*" ]
 
@@ -88,25 +88,6 @@ subjects:
 
 ---
 apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
-kind: ClusterRole
-metadata:
-  name: clusternet:app:deployer
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-  {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4}}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-rules:
-  - apiGroups: ["*"]
-    resources: ["*"]
-    verbs: ["*"]
-  - nonResourceURLs: ["*"]
-    verbs: ["*"]
-
----
-apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
 kind: ClusterRoleBinding
 metadata:
   name: clusternet:app:deployer
@@ -120,7 +101,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: clusternet:app:deployer
+  name: cluster-admin
 subjects:
   - kind: ServiceAccount
     name: clusternet-app-deployer
