@@ -6,6 +6,30 @@ entries:
       role: Agent
     apiVersion: v2
     appVersion: v0.15.2
+    created: "2023-05-29T08:25:35.417389548Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for clusternet-agent
+    digest: 0a9951ad2f834ed8b12413a5a38b2909b26982d19de960ecea5c4a6abfc9ee20
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    keywords:
+    - clusternet
+    - agent
+    - clusternet-agent
+    name: clusternet-agent
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-agent
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-agent-0.12.5/clusternet-agent-0.12.5.tgz
+    version: 0.12.5
+  - annotations:
+      category: Infrastructure
+      role: Agent
+    apiVersion: v2
+    appVersion: v0.15.2
     created: "2023-05-11T11:59:11.354330022Z"
     dependencies:
     - name: common
@@ -534,6 +558,28 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: v0.15.2
+    created: "2023-05-29T08:25:35.593718765Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for clusternet-controller-manager
+    digest: a5f423c3502451e4b54b64b5d4a1576db123e506f393ddf3faf4fdaef7cc3687
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-controller-manager
+    keywords:
+    - clusternet
+    - cluster management
+    name: clusternet-controller-manager
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-controller-manager
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-controller-manager-0.12.5/clusternet-controller-manager-0.12.5.tgz
+    version: 0.12.5
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: v0.15.2
     created: "2023-05-11T11:59:11.49949447Z"
     dependencies:
     - name: common
@@ -597,6 +643,28 @@ entries:
     - https://github.com/clusternet/charts/releases/download/clusternet-controller-manager-0.12.0/clusternet-controller-manager-0.12.0.tgz
     version: 0.12.0
   clusternet-hub:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: v0.15.2
+    created: "2023-05-29T08:25:35.740417142Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for clusternet-hub
+    digest: ac5a081fc303521222a9d5a0ae0a7b318085757e3bff2ec653c65731b21a084e
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    keywords:
+    - clusternet
+    - cluster management
+    name: clusternet-hub
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-hub
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-hub-0.12.5/clusternet-hub-0.12.5.tgz
+    version: 0.12.5
   - annotations:
       category: Infrastructure
     apiVersion: v2
@@ -1065,6 +1133,30 @@ entries:
       role: Scheduler
     apiVersion: v2
     appVersion: v0.15.2
+    created: "2023-05-29T08:25:35.888726342Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for clusternet-scheduler
+    digest: 7e5a9f21518bbb8b9c323199f1a2536494c7a31b6fb92f9eade0ee813a9f6122
+    home: https://github.com/clusternet/charts/tree/main/charts/clusternet-scheduler
+    keywords:
+    - clusternet
+    - scheduler
+    - clusternet-scheduler
+    name: clusternet-scheduler
+    sources:
+    - https://github.com/clusternet/charts/tree/main/charts/clusternet-scheduler
+    type: application
+    urls:
+    - https://github.com/clusternet/charts/releases/download/clusternet-scheduler-0.12.5/clusternet-scheduler-0.12.5.tgz
+    version: 0.12.5
+  - annotations:
+      category: Infrastructure
+      role: Scheduler
+    apiVersion: v2
+    appVersion: v0.15.2
     created: "2023-05-11T11:59:11.76720392Z"
     dependencies:
     - name: common
@@ -1420,4 +1512,4 @@ entries:
     urls:
     - https://github.com/clusternet/charts/releases/download/clusternet-scheduler-0.3.0/clusternet-scheduler-0.3.0.tgz
     version: 0.3.0
-generated: "2023-05-11T11:59:11.767736423Z"
+generated: "2023-05-29T08:25:35.889107848Z"
