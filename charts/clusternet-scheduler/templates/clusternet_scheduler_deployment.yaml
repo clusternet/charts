@@ -71,6 +71,9 @@ spec:
           args:
             - --leader-elect={{ .Values.leaderElect }}
             - --leader-elect-resource-namespace=$(SYSTEM_NAMESPACE)
+            - --feature-gates={{ .Values.featureGates }}
+            - --kube-api-burst={{ .Values.kubeAPI.burst }}
+            - --kube-api-qps={{ .Values.kubeAPI.qps }}
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}

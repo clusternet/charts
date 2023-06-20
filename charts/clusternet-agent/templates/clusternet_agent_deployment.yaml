@@ -119,6 +119,9 @@ spec:
             - --cluster-reg-parent-url=$(PARENT_URL)
             - --leader-elect={{ .Values.leaderElect }}
             - --leader-elect-resource-namespace=$(AGENT_NAMESPACE)
+            - --feature-gates={{ .Values.featureGates }}
+            - --kube-api-burst={{ .Values.kubeAPI.burst }}
+            - --kube-api-qps={{ .Values.kubeAPI.qps }}
             {{- range $key, $value := .Values.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}

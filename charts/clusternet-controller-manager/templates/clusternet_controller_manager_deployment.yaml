@@ -89,6 +89,8 @@ spec:
             - --reserved-namespace=$(RESERVED_NAMESPACE)
             - --feature-gates={{ .Values.featureGates }}
             - --controllers={{ .Values.controllers }}
+            - --kube-api-burst={{ .Values.kubeAPI.burst }}
+            - --kube-api-qps={{ .Values.kubeAPI.qps }}
             {{- range $key, $value := .Values.extraArgs }}
             {{- if $value }}
             - --{{ $key }}={{ $value }}

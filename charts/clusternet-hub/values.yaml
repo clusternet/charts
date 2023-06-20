@@ -38,7 +38,7 @@ peerPort: 8123
 image:
   registry: ghcr.io
   repository: clusternet/clusternet-hub
-  tag: v0.15.2
+  tag: v0.16.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -60,6 +60,11 @@ anonymousAuthSupported: true
 leaderElect: true
 ## @param featureGates Enable or disable feature gates
 featureGates: "SocketConnection=true,ShadowAPI=true"
+## @param kubeAPI.burst Kubernetes API client Burst limit to use while talking with 'core' kubernetes apiserver
+## @param kubeAPI.qps Kubernetes API client QPS limit to use while talking with the 'core' kubernetes apiserver
+kubeAPI:
+  burst: "100"
+  qps: "50.0"
 ## @param extraArgs Additional command line arguments to pass to clusternet-hub
 ## e.g:
 ##  v: 4
