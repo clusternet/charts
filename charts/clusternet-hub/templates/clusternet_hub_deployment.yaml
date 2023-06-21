@@ -159,6 +159,8 @@ spec:
             - --reserved-namespace=$(RESERVED_NAMESPACE)
             - --peer-port={{ .Values.peerPort }}
             - --feature-gates={{ .Values.featureGates }}
+            - --kube-api-burst={{ .Values.kubeAPI.burst }}
+            - --kube-api-qps={{ .Values.kubeAPI.qps }}
             {{- range $key, $value := .Values.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}

@@ -1,10 +1,9 @@
-
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.7.0
+    controller-gen.kubebuilder.io/version: v0.10.0
   creationTimestamp: null
   name: helmreleases.apps.clusternet.io
 spec:
@@ -61,8 +60,8 @@ spec:
             description: HelmReleaseSpec defines the spec of HelmRelease
             properties:
               atomic:
-                description: Atomic, if true, for install case, will uninstall failed
-                  release, for upgrade case, will roll back on failure.
+                description: Atomic, for install case, if true, will uninstall failed
+                  release.
                 type: boolean
               chart:
                 description: Chart is the name of a Helm Chart in the Repository.
@@ -124,13 +123,17 @@ spec:
                 description: TimeoutSeconds is the timeout of the chart to be install/upgrade/rollback/uninstall
                 format: int32
                 type: integer
+              upgradeAtomic:
+                description: UpgradeAtomic, for upgrade case, if true, will roll back
+                  failed release.
+                type: boolean
               version:
                 description: ChartVersion is the version of the chart to be deployed.
                   It will be defaulted with current latest version if empty.
                 type: string
               wait:
                 description: Wait determines whether the wait operation should be
-                  performed after the upgrade is requested.
+                  performed after helm install, upgrade or uninstall is requested.
                 type: boolean
               waitForJob:
                 description: WaitForJobs determines whether the wait operation for
@@ -172,9 +175,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

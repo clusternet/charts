@@ -2,17 +2,21 @@
 
 `clusternet-hub` is responsible for
 
-- approving cluster registration requests and creating dedicated resources, such as namespaces, serviceaccounts and RBAC
-  rules, for each child cluster;
-- serving as an **aggregated apiserver (AA)**, which is used to serve as a websocket server that maintain multiple
-  active websocket connections from child clusters;
-- providing Kubernstes-styled API to redirect/proxy/upgrade requests to each child cluster;
-- coordinating and deploying applications to multiple clusters from a single set of APIs;
+- approving cluster registration requests and creating dedicated
+  resources, such as namespaces, serviceaccounts and RBAC rules, for
+  each child cluster;
+- serving as an **aggregated apiserver (AA)**, which is used to serve as
+  a websocket server that maintain multiple active websocket connections
+  from child clusters;
+- providing Kubernstes-styled API to redirect/proxy/upgrade requests to
+  each child cluster;
+- coordinating and deploying applications to multiple clusters from a
+  single set of APIs;
 
 > :pushpin: :pushpin: Note:
 >
-> Since `clusternet-hub` is running as an AA, please make sure that parent apiserver could visit the
-> `clusternet-hub` service.
+> Since `clusternet-hub` is running as an AA, please make sure that
+> parent apiserver could visit the `clusternet-hub` service.
 
 ## Prerequisites
 
@@ -28,15 +32,18 @@ helm install clusternet-hub -n clusternet-system --create-namespace clusternet/c
 
 ### Create Auth Token
 
-- If bootstrapping authentication is supported, i.e. `--enable-bootstrap-token-auth=true` is explicitly set in the
+- If bootstrapping authentication is supported, i.e.
+  `--enable-bootstrap-token-auth=true` is explicitly set in the
   kube-apiserver running in parent cluster.
 
   ```bash
   kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
   ```
 
-- If bootstrapping authentication is **not supported** by the kube-apiserver in parent cluster (like k3s) ,
-  i.e. `--enable-bootstrap-token-auth=false` (which defaults to be false), please use serviceaccount token instead.
+- If bootstrapping authentication is **not supported** by the
+  kube-apiserver in parent cluster (like k3s) , i.e.
+  `--enable-bootstrap-token-auth=false` (which defaults to be false),
+  please use serviceaccount token instead.
 
   ```bash
   # this will create a serviceaccount token
@@ -54,9 +61,9 @@ kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annota
 
 ### Installing the Chart
 
-> Note:
-> The images are synced to [dockerhub](https://hub.docker.com/u/clusternet) as well,
-> you could set `image.registry` to empty or `docker.io` if needed.
+> Note: The images are synced to
+> [dockerhub](https://hub.docker.com/u/clusternet) as well, you could
+> set `image.registry` to empty or `docker.io` if needed.
 
 To install the chart with the release name `clusternet-hub`:
 
@@ -66,8 +73,9 @@ helm install clusternet-hub -n clusternet-system --create-namespace clusternet/c
 kubectl apply -f https://raw.githubusercontent.com/clusternet/clusternet/main/manifests/samples/cluster_bootstrap_token.yaml
 ```
 
-These commands deploy `clusternet-hub` on the Kubernetes cluster in the default configuration.
-The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+These commands deploy `clusternet-hub` on the Kubernetes cluster in the
+default configuration. The [Parameters](#parameters) section lists the
+parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list -A`
 
@@ -79,14 +87,15 @@ To uninstall/delete the `clusternet-hub` deployment:
 helm delete clusternet-hub -n clusternet-system
 ```
 
-The command removes all the Kubernetes components associated with the chart and deletes the release.
+The command removes all the Kubernetes components associated with the
+chart and deletes the release.
 
 ### Parameters
 
 #### Common parameters
 
 | Name                | Description                                        | Value |
-| ------------------- | -------------------------------------------------- | ----- |
+|:--------------------|:---------------------------------------------------|:------|
 | `kubeVersion`       | Override Kubernetes version                        | `""`  |
 | `nameOverride`      | String to partially override common.names.fullname | `""`  |
 | `fullnameOverride`  | String to fully override common.names.fullname     | `""`  |
@@ -96,20 +105,22 @@ The command removes all the Kubernetes components associated with the chart and 
 #### Exposure parameters
 
 | Name                        | Description                                                                               | Value                                  |
-| --------------------------- | ----------------------------------------------------------------------------------------- |----------------------------------------|
+|:----------------------------|:------------------------------------------------------------------------------------------|:---------------------------------------|
 | `replicaCount`              | Specify number of clusternet-hub replicas                                                 | `3`                                    |
 | `serviceAccount.name`       | The name of the ServiceAccount to create                                                  | `"clusternet-hub"`                     |
 | `securePort`                | Port where clusternet-hub will be running                                                 | `443`                                  |
 | `peerPort`                  | Port where clusternet-hub peer will be advertised                                         | `8123`                                 |
 | `image.registry`            | clusternet-hub image registry                                                             | `ghcr.io`                              |
 | `image.repository`          | clusternet-hub image repository                                                           | `clusternet/clusternet-hub`            |
-| `image.tag`                 | clusternet-hub image tag (immutable tags are recommended)                                 | `v0.15.2`                              |
+| `image.tag`                 | clusternet-hub image tag (immutable tags are recommended)                                 | `v0.16.0`                              |
 | `image.pullPolicy`          | clusternet-hub image pull policy                                                          | `IfNotPresent`                         |
 | `image.pullSecrets`         | Specify docker-registry secret names as an array                                          | `[]`                                   |
 | `reservedNamespace`         | Reserved namespace used for creating Manifest by clusternet-hub                           | `clusternet-reserved`                  |
 | `anonymousAuthSupported`    | Whether the anonymous access is allowed by the 'core' kubernetes server                   | `true`                                 |
 | `leaderElect`               | Enable or disable leader elect                                                            | `true`                                 |
 | `featureGates`              | Enable or disable feature gates                                                           | `SocketConnection=true,ShadowAPI=true` |
+| `kubeAPI.burst`             | Kubernetes API client Burst limit to use while talking with 'core' kubernetes apiserver   | `100`                                  |
+| `kubeAPI.qps`               | Kubernetes API client QPS limit to use while talking with the 'core' kubernetes apiserver | `50.0`                                 |
 | `extraArgs`                 | Additional command line arguments to pass to clusternet-hub                               | `{}`                                   |
 | `resources.limits`          | The resources limits for the container                                                    | `{}`                                   |
 | `resources.requests`        | The requested resources for the container                                                 | `{}`                                   |
@@ -123,3 +134,4 @@ The command removes all the Kubernetes components associated with the chart and 
 | `nodeAffinityPreset.key`    | Node label key to match. Ignored if `affinity` is set.                                    | `""`                                   |
 | `nodeAffinityPreset.values` | Node label values to match. Ignored if `affinity` is set.                                 | `[]`                                   |
 | `affinity`                  | Affinity for pod assignment                                                               | `{}`                                   |
+

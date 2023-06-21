@@ -37,7 +37,7 @@ serviceAccount:
 image:
   registry: ghcr.io
   repository: clusternet/clusternet-scheduler
-  tag: v0.15.2
+  tag: v0.16.0
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -53,6 +53,13 @@ image:
   pullSecrets: []
 ## @param leaderElect Enable or disable leader elect
 leaderElect: true
+## @param featureGates Enable or disable feature gates
+featureGates: "FailOver=true,FeasibleClustersToleration=true"
+## @param kubeAPI.burst Kubernetes API client Burst limit to use while talking with 'core' kubernetes apiserver
+## @param kubeAPI.qps Kubernetes API client QPS limit to use while talking with the 'core' kubernetes apiserver
+kubeAPI:
+  burst: "100"
+  qps: "50.0"
 ## @param extraArgs Additional command line arguments to pass to clusternet-scheduler
 extraArgs: {}
 ## Container resource requests and limits
