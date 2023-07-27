@@ -53,7 +53,7 @@ helm install clusternet-hub -n clusternet-system --create-namespace clusternet/c
 ### Get ServiceAccount Token from parent cluster
 
 ```bash
-kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annotations.kubernetes\.io/service-account\.name=="cluster-bootstrap-use")].data.token}' | base64 --decode; echo
+kubectl get secret -n clusternet-system -o=jsonpath='{.items[?(@.metadata.annotations.kubernetes\.io/service-account\.name=="cluster-bootstrap-use")].data.token}' | base64 -i --decode; echo
 # HERE WILL OUTPUTS A LONG STRING. PLEASE REMEMBER THIS.
 ```
 
