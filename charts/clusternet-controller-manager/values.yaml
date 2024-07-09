@@ -40,7 +40,7 @@ controllers: "*"
 image:
   registry: ghcr.io
   repository: clusternet/clusternet-controller-manager
-  tag: v0.16.0
+  tag: v0.17.1
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -61,7 +61,7 @@ anonymousAuthSupported: true
 ## @param leaderElect Enable or disable leader elect
 leaderElect: true
 ## @param featureGates Enable or disable feature gates
-featureGates: "SocketConnection=true,Deployer=true,FeedInUseProtection=true,FeedInventory=true"
+featureGates: "SocketConnection=true,Deployer=true,FeedInUseProtection=true,FeedInventory=true,ClusterInit=false"
 ## @param kubeAPI.burst Kubernetes API client Burst limit to use while talking with 'core' kubernetes apiserver
 ## @param kubeAPI.qps Kubernetes API client QPS limit to use while talking with the 'core' kubernetes apiserver
 kubeAPI:
