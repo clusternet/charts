@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .Values.serviceAccount.name }}
+  name: {{ template "clusternet-scheduler.serviceAccountName" . }}
   namespace: {{ .Release.Namespace }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
@@ -55,7 +55,7 @@ spec:
       {{- if .Values.tolerations}}
       tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ .Values.serviceAccount.name }}
+      serviceAccountName: {{ template "clusternet-scheduler.serviceAccountName" . }}
       containers:
         - name: clusternet-scheduler
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global) }}

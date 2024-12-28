@@ -15,5 +15,5 @@ roleRef:
   name: cluster-admin
 subjects:
   - kind: ServiceAccount
-    name: {{ .Values.serviceAccount.name }}
+    name: {{ template "clusternet-hub.serviceAccountName" . }}
     namespace: {{ .Release.Namespace }}

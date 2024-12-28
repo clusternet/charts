@@ -12,6 +12,13 @@ keywords:
 sources:
   - https://github.com/clusternet/charts/tree/main/charts/clusternet-scheduler
 
+dependencies:
+  - name: common
+    repository: oci://registry-1.docker.io/bitnamicharts
+    tags:
+      - bitnami-common
+    version: 2.x.x
+
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
