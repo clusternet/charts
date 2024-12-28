@@ -46,7 +46,7 @@ roleRef:
   name: clusternet:scheduler
 subjects:
   - kind: ServiceAccount
-    name: {{ template "clusternet-scheduler.serviceAccountName" . }}
+    name: {{ .Values.serviceAccount.name }}
     namespace: {{ .Release.Namespace }}
 
 ---
@@ -67,5 +67,5 @@ roleRef:
   name: clusternet:system:socketsproxy
 subjects:
   - kind: ServiceAccount
-    name: {{ template "clusternet-scheduler.serviceAccountName" . }}
+    name: {{ .Values.serviceAccount.name }}
     namespace: {{ .Release.Namespace }}

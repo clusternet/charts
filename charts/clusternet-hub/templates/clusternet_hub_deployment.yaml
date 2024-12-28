@@ -14,7 +14,7 @@ metadata:
 kind: ServiceAccount
 apiVersion: v1
 metadata:
-  name: {{ template "clusternet-hub.serviceAccountName" . }}
+  name: {{ .Values.serviceAccount.name }}
   namespace: {{ .Release.Namespace }}
   annotations:
     {{- if .Values.commonAnnotations }}
@@ -124,7 +124,7 @@ spec:
       {{- if .Values.tolerations}}
       tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ template "clusternet-hub.serviceAccountName" . }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
       volumes:
         - hostPath:
             path: /etc/clusternet

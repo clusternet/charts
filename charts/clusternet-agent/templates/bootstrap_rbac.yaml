@@ -34,7 +34,7 @@ roleRef:
   name: clusternet:agent:admin
 subjects:
   - kind: ServiceAccount
-    name: {{ template "clusternet-agent.serviceAccountName" . }}
+    name: {{ .Values.serviceAccount.name }}
     namespace: {{ .Release.Namespace }}
 
 ---
@@ -83,7 +83,7 @@ roleRef:
   name: clusternet:agent:admin
 subjects:
   - kind: ServiceAccount
-    name: clusternet-agent
+    name: {{ .Values.serviceAccount.name }}
     namespace: {{ .Release.Namespace }}
 
 ---

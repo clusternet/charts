@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ template "clusternet-agent.serviceAccountName" . }}
+  name: {{ .Values.serviceAccount.name }}
   namespace: {{ .Release.Namespace }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
@@ -85,7 +85,7 @@ spec:
       {{- if .Values.tolerations}}
       tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.tolerations "context" $) | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ template "clusternet-agent.serviceAccountName" . }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
         - name: clusternet-agent
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global) }}

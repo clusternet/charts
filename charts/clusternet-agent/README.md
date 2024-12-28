@@ -114,7 +114,7 @@ chart and deletes the release.
 | `serviceAccount.name`             | The name of the ServiceAccount to create                                                  | `"clusternet-agent"`                                                |
 | `image.registry`                  | clusternet-agent image registry                                                           | `ghcr.io`                                                           |
 | `image.repository`                | clusternet-agent image repository                                                         | `clusternet/clusternet-agent`                                       |
-| `image.tag`                       | clusternet-agent image tag (immutable tags are recommended)                               | `v0.17.2`                                                           |
+| `image.tag`                       | clusternet-agent image tag (immutable tags are recommended)                               | `v0.18.0`                                                           |
 | `image.pullPolicy`                | clusternet-agent image pull policy                                                        | `IfNotPresent`                                                      |
 | `image.pullSecrets`               | Specify docker-registry secret names as an array                                          | `[]`                                                                |
 | `leaderElect`                     | Enable or disable leader elect                                                            | `true`                                                              |
