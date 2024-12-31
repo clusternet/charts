@@ -10,6 +10,13 @@ keywords:
 sources:
   - https://github.com/clusternet/charts/tree/main/charts/clusternet-controller-manager
 
+dependencies:
+  - name: common
+    repository: oci://registry-1.docker.io/bitnamicharts
+    tags:
+      - bitnami-common
+    version: 2.x.x
+
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -20,21 +27,16 @@ sources:
 # pipeline. Library charts do not define any templates and therefore cannot be deployed
 type: application
 
-dependencies:
-  - name: common
-    version: 1.x.x
-    repository: https://charts.bitnami.com/bitnami
-
 # A SemVer range of compatible Kubernetes versions
 kubeVersion: ""
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.14.1
+version: 0.15.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "v0.17.2"
+appVersion: "v0.18.0"
